@@ -2,25 +2,84 @@
 Muhammad Rasyid
 09030182428016
 TK2A
-1. Lihat peralatan I/O, character device, yang ada pada sistem komputer
+1. Menampilkan Daftar Perangkat I/O (Character Device) di Sistem
+
+Menampilkan daftar perangkat yang ada di sistem Linux, termasuk perangkat block (hard disk, USB) dan perangkat karakter (keyboard, mouse, dll):
 
 ls -l /dev
 
-Image
+2. Membuat Subdirektori januari, februari, dan maret
 
-Menampilkan daftar perangkat yang ada di sistem Linux, termasuk perangkat block (hard disk, USB) dan character device (keyboard, mouse, dll).
-2. Buat sub direktori januari, februari, dan maret sekaligus pada direktori latihan5
+Membuat subdirektori di dalam direktori latihan5:
 
 mkdir -p latihan5/januari latihan5/februari latihan5/maret
 
-Image
+Opsi -p memastikan bahwa jika direktori latihan5 belum ada, maka akan dibuat terlebih dahulu.
+3. Membuat File dataku dan Menyalinnya ke Subdirektori Lain
 
-mkdir digunakan untuk membuat direktori. Opsi -p memastikan bahwa jika direktori latihan5 belum ada, maka akan dibuat terlebih dahulu.
-3. Buat file dataku dan salin ke sub direktori lainnya
+Membuat file dataku dengan informasi pribadi dan menyalinnya ke subdirektori februari dan maret:
 
 echo -e "Nama: [Nama Anda]\nNIM: [NIM Anda]\nAlamat: [Alamat Anda]" > latihan5/januari/dataku
 
-Image
+Salin file ke direktori februari dan maret:
+
+cp latihan5/januari/dataku latihan5/februari/
+cp latihan5/januari/dataku latihan5/maret/
+
+4. Mengubah Izin Akses File dataku di Direktori januari
+
+Memberikan izin read dan write kepada semua pengguna (user, group, dan others):
+
+chmod 666 latihan5/januari/dataku
+
+5. Mengubah Izin Akses File dataku di Direktori februari
+
+Memberikan izin penuh kepada user dan izin read dan execute kepada group dan others:
+
+chmod 755 latihan5/februari/dataku
+
+6. Mengubah Izin Akses File dataku di Direktori maret
+
+Memberikan izin penuh (read, write, execute) kepada semua pengguna:
+
+chmod 777 latihan5/maret/dataku
+
+Menghapus direktori maret:
+
+rm -r latihan5/maret
+
+7. Mengubah Izin Akses Direktori februari agar Hanya Bisa Dibaca
+
+Memberikan izin read-only untuk semua pengguna:
+
+chmod 444 latihan5/februari
+
+Mencoba membuat direktori baru dalam februari (akan gagal karena izin read-only):
+
+mkdir latihan5/februari/haha
+
+8. Mengubah umask untuk Pengaturan Izin Default File
+
+Mengubah umask menjadi 027 untuk memastikan file baru memiliki izin default rw-r-----:
+
+umask 027
+umask
+
+9. Membuat Hard Link dan Symbolic Link dari File dataku
+
+Membuat hard link ke file dataku:
+
+ln latihan5/januari/dataku latihan5/januari/dataku.ini
+
+Membuat symbolic link (symlink) ke file dataku:
+
+ln -s latihan5/januari/dataku latihan5/januari/dataku.juga
+
+Menampilkan jumlah link yang ada pada file dataku:
+
+ls -l latihan5/januari/
+
+Semoga ini membantu! Anda bisa menempelkan teks di atas langsung ke README GitHub Anda.
 
 echo digunakan untuk menulis teks ke dalam file. \n digunakan untuk memberikan baris baru dalam teks.
 
